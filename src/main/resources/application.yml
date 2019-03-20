@@ -1,0 +1,27 @@
+# DataSource Config
+spring:
+  datasource:
+    username: root
+    password: bywin@1229
+    url: jdbc:mysql://47.110.245.113:3306/data_resource?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&verifyServerCertificate=false&useSSL=false&requireSSL=false
+    driver-class-name: com.mysql.jdbc.Driver
+    ##Redis配置
+    ## REDIS (RedisProperties)
+    ## Redis数据库索引（默认为0）
+  redis:
+    database: 0
+  ## Redis服务器地址
+    host: localhost
+  ## Redis服务器连接端口
+    port: 6379
+  ## Redis服务器连接密码（默认为空）
+#    password: aier_2017
+
+# Logger Config
+logging:
+  level:
+    com.demo.task.mapper: debug
+# 扫描 mapper.xml
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*Mapper.xml
+
