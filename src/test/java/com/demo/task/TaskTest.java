@@ -56,7 +56,7 @@ public class TaskTest {
         DjTaskRelease task = new DjTaskRelease();
         task.setTaskId("12132");
         task.setTaskName("我的任务");
-        redisUtil.set("testTaskss",task);
+        redisUtil.set("testTaskss",task,-1);
     }
     @Test
     public void testDelKey() {

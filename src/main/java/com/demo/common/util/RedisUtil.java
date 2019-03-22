@@ -134,8 +134,7 @@ public class RedisUtil {
             if(time > 0){
                 stringRedisTemplate.opsForValue().set(basePrefix+key, JsonUtil.serialize(value), time, TimeUnit.SECONDS);
             }else{
-                set(key, value);
-                setExpire(key,time);
+                stringRedisTemplate.opsForValue().set(basePrefix+key, JsonUtil.serialize(value));
             }
             return true;
         } catch (Exception e) {

@@ -1,6 +1,6 @@
 package com.demo.common.config;
 
-import com.bywin.service.task.RedisMsgQueueService;
+import com.demo.common.service.RedisMsgQueueService;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
