@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +25,8 @@ public class RedisUtil {
      */
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
-    private final static String basePrefix = "quartz-job.";
+    private final static String basePrefix = "quartz-job:";
+    private long defaultExpireTime = 60*30;//设置默认存活半小时
 
     /**
      * 判断key是否存在
@@ -113,6 +113,7 @@ public class RedisUtil {
     public <T> boolean set(String key,T value) {
         try {
             stringRedisTemplate.opsForValue().set(basePrefix+key, JsonUtil.serialize(value));
+            setExpire(key,defaultExpireTime);
             return true;
         } catch (Exception e) {
             log.error("error occurred in RedisUtil.set(String key,String value) ---> ",e);
@@ -133,7 +134,8 @@ public class RedisUtil {
             if(time > 0){
                 stringRedisTemplate.opsForValue().set(basePrefix+key, JsonUtil.serialize(value), time, TimeUnit.SECONDS);
             }else{
-                set(basePrefix+key, value);
+                set(key, value);
+                setExpire(key,time);
             }
             return true;
         } catch (Exception e) {
